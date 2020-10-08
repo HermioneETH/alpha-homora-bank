@@ -1,0 +1,35 @@
+type ibETHTransfer @entity {
+  id: ID!
+  from: Bytes!
+  to: Bytes!
+  value: BigInt! # uint256
+}
+
+type Balance @entity {
+  id: ID!
+  amount: BigInt!
+}
+
+type BankSummary @entity {
+  id: ID!
+  ibETHSupply: BigInt!
+  totalETH: BigInt!
+  totalDebtShare: BigInt!
+  totalDebtValue: BigInt!
+}
+
+type Position @entity {
+  id: ID!
+  goblin: Bytes!
+  owner: Bytes!
+  debtShare: BigInt! # uint256
+}
+
+type Reinvest @entity {
+  id: ID!
+  caller: Bytes!
+  reward: BigInt!
+  bounty: BigInt!
+  blockTime: BigInt!
+  goblin: Bytes!
+}
