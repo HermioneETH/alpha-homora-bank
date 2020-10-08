@@ -8,8 +8,8 @@ import {
   OwnershipTransferred,
   RemoveDebt,
   Transfer
-} from "../generated/Bank/Bank"
-import { IBETHTransfer, Balance, BankSummary, Position } from "../generated/schema"
+} from "../../generated/Bank/Bank"
+import { ibETHTransfer, Balance, BankSummary, Position } from "../../generated/schema"
 
 /* export function handleAddDebt(event: AddDebt): void {
   // Entities can be loaded from the store using a string ID; this ID
@@ -70,7 +70,7 @@ import { IBETHTransfer, Balance, BankSummary, Position } from "../generated/sche
   // - contract.totalETH(...)
 } */
 
-export function handleAddDebt(event: AddDebt): void {
+export function handleAddDebt(event: AddDebt) : void {
   updatePosition(event.address, event.params.id);
   updateBankSummary(event.address);
 }
@@ -82,21 +82,21 @@ export function handleWork(event: Work): void {
 
 export function handleApproval(event: Approval): void { }
 
-export function handleKill(event: Kill): void {
+export function handleKill(event: Kill): void { 
   updatePosition(event.address, event.params.id);
   updateBankSummary(event.address);
 }
 
 export function handleOwnershipTransferred(event: OwnershipTransferred): void { }
 
-export function handleRemoveDebt(event: RemoveDebt): void {
+export function handleRemoveDebt(event: RemoveDebt): void { 
   updatePosition(event.address, event.params.id);
   updateBankSummary(event.address);
 }
 
 export function handleTransfer(event: Transfer): void {
   let transactionId = event.transaction.hash.toHexString() + "-" + event.logIndex.toHexString()
-  let transfer = new IBETHTransfer(transactionId)
+  let transfer = new ibETHTransfer(transactionId)
 
   transfer.from = event.params.from
   transfer.to = event.params.to
@@ -123,7 +123,7 @@ export function handleTransfer(event: Transfer): void {
   updateBankSummary(event.address);
 }
 
-function updateBankSummary(bankAddress: Address): void {
+function updateBankSummary(bankAddress :Address): void {
   let summary = BankSummary.load("Gringotts")
   if (summary == null) {
     summary = new BankSummary("Gringotts")
@@ -136,7 +136,7 @@ function updateBankSummary(bankAddress: Address): void {
   summary.save()
 }
 
-function updatePosition(bankAddress: Address, positionId: BigInt): void {
+function updatePosition(bankAddress :Address, positionId: BigInt): void {
   let id = positionId.toHexString()
   let position = Position.load(id)
   if (position == null) {

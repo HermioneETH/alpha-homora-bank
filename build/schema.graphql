@@ -1,4 +1,4 @@
-type IBETHTransfer @entity {
+type ibETHTransfer @entity {
   id: ID!
   from: Bytes!
   to: Bytes!
@@ -23,4 +23,13 @@ type Position @entity {
   goblin: Bytes!
   owner: Bytes!
   debtShare: BigInt! # uint256
+}
+
+type Reinvest @entity {
+  id: ID!
+  caller: Bytes!
+  reward: BigInt!
+  bounty: BigInt!
+  blockTime: BigInt!
+  goblin: Bytes!
 }

@@ -12,7 +12,7 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
-export class IBETHTransfer extends Entity {
+export class ibETHTransfer extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -20,17 +20,17 @@ export class IBETHTransfer extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save IBETHTransfer entity without an ID");
+    assert(id !== null, "Cannot save ibETHTransfer entity without an ID");
     assert(
       id.kind == ValueKind.STRING,
-      "Cannot save IBETHTransfer entity with non-string ID. " +
+      "Cannot save ibETHTransfer entity with non-string ID. " +
         'Considering using .toHex() to convert the "id" to a string.'
     );
-    store.set("IBETHTransfer", id.toString(), this);
+    store.set("ibETHTransfer", id.toString(), this);
   }
 
-  static load(id: string): IBETHTransfer | null {
-    return store.get("IBETHTransfer", id) as IBETHTransfer | null;
+  static load(id: string): ibETHTransfer | null {
+    return store.get("ibETHTransfer", id) as ibETHTransfer | null;
   }
 
   get id(): string {
@@ -232,5 +232,81 @@ export class Position extends Entity {
 
   set debtShare(value: BigInt) {
     this.set("debtShare", Value.fromBigInt(value));
+  }
+}
+
+export class Reinvest extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save Reinvest entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save Reinvest entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("Reinvest", id.toString(), this);
+  }
+
+  static load(id: string): Reinvest | null {
+    return store.get("Reinvest", id) as Reinvest | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get caller(): Bytes {
+    let value = this.get("caller");
+    return value.toBytes();
+  }
+
+  set caller(value: Bytes) {
+    this.set("caller", Value.fromBytes(value));
+  }
+
+  get reward(): BigInt {
+    let value = this.get("reward");
+    return value.toBigInt();
+  }
+
+  set reward(value: BigInt) {
+    this.set("reward", Value.fromBigInt(value));
+  }
+
+  get bounty(): BigInt {
+    let value = this.get("bounty");
+    return value.toBigInt();
+  }
+
+  set bounty(value: BigInt) {
+    this.set("bounty", Value.fromBigInt(value));
+  }
+
+  get blockTime(): BigInt {
+    let value = this.get("blockTime");
+    return value.toBigInt();
+  }
+
+  set blockTime(value: BigInt) {
+    this.set("blockTime", Value.fromBigInt(value));
+  }
+
+  get goblin(): Bytes {
+    let value = this.get("goblin");
+    return value.toBytes();
+  }
+
+  set goblin(value: Bytes) {
+    this.set("goblin", Value.fromBytes(value));
   }
 }
